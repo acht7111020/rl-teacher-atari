@@ -13,7 +13,8 @@ def upload_to_gcs(local_path, gcs_path):
 
     # print("Copying media to %s in a background process" % gcs_path)
     # Use DEVNULL to mute output.
-    subprocess.check_call(['gsutil', 'cp', local_path, gcs_path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    gsutilpath = os.environ['GSUTIL']
+    subprocess.check_call(['python2', gsutilpath, 'cp', local_path, gcs_path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def write_segment_to_video(frames, fname, fps):
     os.makedirs(osp.dirname(fname), exist_ok=True)
